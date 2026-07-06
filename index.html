@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy English Emma v1.0</title>
+<style>
+body{font-family:Arial;margin:0;transition:.5s}
+.theme1{background:#fff8e7}.theme2{background:#e8f7ff}.theme3{background:#f7e8ff}
+.card{max-width:700px;margin:20px auto;background:#fff;padding:20px;border-radius:16px;box-shadow:0 4px 12px #999}
+button{padding:10px 16px;margin:6px;border:none;border-radius:10px;background:#4caf50;color:#fff;font-size:16px}
+.small{background:#2196f3}.warn{background:#ff9800}
+#answer{display:none}
+</style></head><body class="theme1">
+<div class="card">
+<h1>🌈 Happy English Emma v1.0</h1>
+<p><b>Tiến độ:</b> <span id="p"></span></p>
+<h2 id="qen"></h2><h3 id="qvi"></h3>
+<div id="answer">
+<p><b>Answer:</b> <span id="aen"></span></p>
+<p><b>Trả lời:</b> <span id="avi"></span></p></div>
+<button onclick="toggle()">👁 Hiện/Ẩn đáp án</button>
+<button class="small" onclick="speak()">🔊 Nghe</button>
+<button class="warn" onclick="repeatQ()">🔁 Luyện lại</button>
+<button onclick="nextQ()">▶ Tiếp tục</button>
+</div>
+<script>
+const data=[
+{q:"Hello! How are you?",v:"Xin chào! Bạn khỏe không?",a:"I'm fine, thank you.",av:"Mình khỏe, cảm ơn."},
+{q:"What's your name?",v:"Bạn tên là gì?",a:"My name is Nam.",av:"Tên mình là Nam."},
+{q:"How old are you?",v:"Bạn bao nhiêu tuổi?",a:"I'm seven years old.",av:"Mình 7 tuổi."},
+{q:"Are you happy?",v:"Bạn có vui không?",a:"Yes, I am.",av:"Có."},
+{q:"What's your favorite color?",v:"Màu yêu thích của bạn là gì?",a:"Blue.",av:"Màu xanh dương."},
+{q:"Do you like cats?",v:"Bạn thích mèo không?",a:"Yes, I do.",av:"Có."},
+{q:"Can you swim?",v:"Bạn biết bơi không?",a:"Yes, I can.",av:"Có."},
+{q:"Do you like English?",v:"Bạn thích tiếng Anh không?",a:"Yes, I do.",av:"Có."},
+{q:"Is this your book?",v:"Đây là sách của bạn phải không?",a:"Yes, it is.",av:"Đúng vậy."},
+{q:"Goodbye!",v:"Tạm biệt!",a:"Goodbye! See you!",av:"Tạm biệt! Hẹn gặp lại!"}
+];
+let i=+localStorage.getItem("emma")||0;
+function theme(){document.body.className=["theme1","theme2","theme3"][Math.floor(i/5)%3]}
+function show(){theme();let d=data[i];p.textContent=(i+1)+"/"+data.length;qen.textContent="🇬🇧 "+d.q;qvi.textContent="🇻🇳 "+d.v;aen.textContent=d.a;avi.textContent=d.av;answer.style.display="none";localStorage.setItem("emma",i)}
+function toggle(){answer.style.display=answer.style.display=="none"?"block":"none";}
+function speak(){speechSynthesis.speak(new SpeechSynthesisUtterance(data[i].q));}
+function repeatQ(){speak();alert("😊 Chúng ta luyện lại câu này nhé!");}
+function nextQ(){if(i<data.length-1){i++;show();speak();}else alert("🎉 Bạn đã hoàn thành phiên bản V1.0!");}
+show();
+</script></body></html>
