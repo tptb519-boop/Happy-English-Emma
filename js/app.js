@@ -1,0 +1,1 @@
+function gotoQuestion(){var n=document.getElementById('goto').value;document.getElementById('info').innerText='Câu '+n+'/100';}
